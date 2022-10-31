@@ -23,7 +23,7 @@ function vill_container() {
 
 	const container = $(".page-header");  // replace
 	
-	container.html("<o> Villantott:");
+	container.html("&lg;o;&gt; Villantott:");
 	container.css("color", "white");
 	container.css("font-size", "20pt");
 	container.css("padding-left", "8pt");
