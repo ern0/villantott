@@ -17,7 +17,7 @@ The plugin is still under development, TODOs:
 - hosting, packaging.
 
 You can try it:
-- open [chrome://extensions](Chrome extensions page),
+- open *Chrome extensions* page: `chrome://extensions`,
 - turn on *developer mode* (upper right corner),
 - hit *load unpacked* button, then select this project's
 `extension/` directory.
