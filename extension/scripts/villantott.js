@@ -2,14 +2,26 @@ vill_main();
 
 function vill_main() {
 
-	var container = vill_container();
-	vill_fill(container);
+	const patterns = [
+			":mellet:",
+			":tökéletes:melle",
+			":hatalmas:melle",
+			":meztelen", ":félmeztelen",
+			":mutatjuk:.*:meztelen:",
+			":szexi:", ":szuperszexi:",
+			":tökéletes:.*:combj",
+			":tökéletes:.*:alakj",
+			":pózol:",
+	]
+	
+	const container = vill_container();
+	vill_fill(container, patterns);
 
 }
 
 function vill_container() {
 
-	container = $(".page-header");
+	const container = $(".page-header");  // replace
 	
 	container.html("Villantott:");
 	container.css("color", "white");
@@ -19,24 +31,52 @@ function vill_container() {
 	return container;
 }
 
-function vill_fill(container) {
+function vill_fill(container, patterns) {
 
-	vill_add(container, "lofasz", "#");
-	vill_add(container, "lofasz2", "#");
-	vill_add(container, "lofasz3", "#");
+	$("a").each(function(_, link) {
+
+		let original_text = $(link).text();
+		original_text = original_text.replaceAll("\n","");
+
+		let normalized_text = original_text.toLowerCase();
+		normalized_text = normalized_text.replaceAll("\ ",":");
+		normalized_text = normalized_text.replaceAll("\.",":");
+		normalized_text = normalized_text.replaceAll("\?",":");
+		normalized_text = normalized_text.replaceAll("\!",":");
+		normalized_text = normalized_text.replaceAll("::",":");
+		normalized_text = normalized_text.replaceAll("::",":");
+		normalized_text = ":" + normalized_text + ":"
+
+		for (let pattern of patterns) {
+
+			pattern = ".*" + pattern + ".*"
+			if (normalized_text.match(pattern)) {
+				
+				if (original_text.substring(0,4) == "Fotó") {
+					original_text = original_text.substring(4);
+				}
+				console.log(normalized_text.substring(0,3),original_text);
+
+				const url = $(link).attr("href");
+				vill_add(container, original_text, url);
+
+				break;
+			}
+		}
+
+	})
 }
 
 function vill_add(container, text, url) {
 
-	var link = $("<a/>");
+	const link = $("<a/>");
 	link.attr("href", url);
 	link.text(text);
 	link.css("color", "white");
 
-	var item = $("<li/>");
+	const item = $("<li/>");
 	item.css("padding-left", "8pt");
 	item.append(link);
 
 	container.append(item);
-
 }
