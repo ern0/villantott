@@ -2,7 +2,6 @@
 
 import sys
 import datetime
-import sqlite3
 from urllib.request import urlopen
 import re
 
@@ -14,24 +13,21 @@ CACHE = "data/"
 class Vill:
 
     PATTERNS = [
-        "melleit",
-        "meztelenül", "félmeztelenül",
-        "mutatjuk.meztelen",
-        "mutatjuk.a.meztelen",
+        "balfék",
+        "mellet",
+        "tökéletes.mellei",
+        "hatalmas.melle*",
+        "meztelen*", "félmeztelen*",
+        "mutatjuk.meztelen*",
+        "mutatjuk.a.meztelen*",
         "szexi", "szuperszexi",
         "meztelenül.mutatta",
         "meztelenül.pózolt",
-        "tökéletes.combját",
-        "tökéletes.combjait",
-        "tökéletes.alakját",
-        "tökéletes.melleit",
+        "tökéletes.combj*",
+        "tökéletes.alakj*",
     ]
 
     def main(self):
-
-        conn = sqlite3.connect(DB)
-        self.cursor = conn.cursor()
-        self.create_table()
 
         if len(sys.argv) < 2:
             self.session = str(datetime.date.today())
@@ -53,18 +49,6 @@ class Vill:
 
         print(self.session + ":")
         self.proc_page()
-
-    def create_table(self):
-
-        try:
-            self.cursor.execute("""
-          		create table items (
-              		session text,
-              		title text
-          		);  
-      		""")
-        except sqlite3.OperationalError:
-            pass
 
     def get_cache_filename(self):
 
@@ -113,12 +97,11 @@ class Vill:
             (prepared, text,) = result
 
             for pattern in self.PATTERNS:
-                pattern = "." + pattern + "."
-                if pattern not in prepared:
-                    continue
-
-                print(" - " + text)
-                break
+                if self.match(prepared, pattern):
+                    if text.startswith("Fotó"):
+                        text = text[4:]
+                    print(" - " + text)
+                    break
 
     def split_line(self, line):
 
@@ -133,6 +116,16 @@ class Vill:
         prepared = prepared.lower()
         
         return (prepared, text,)
+
+    def match(self, prepared, pattern):
+
+        if pattern.endswith("*"):
+            pattern = "." + pattern[:-1]
+        else:
+            pattern = "." + pattern + "."
+        
+        return (pattern in prepared)
+            
 
 if __name__ == "__main__":
     (Vill()).main()
