@@ -25,7 +25,7 @@ function vill_container() {
 	
 	container.html("Villantott:");
 	container.css("color", "white");
-	container.css("font-size", "24pt");
+	container.css("font-size", "20pt");
 	container.css("padding-left", "8pt");
 
 	return container;
