@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import os
 import datetime
 from urllib.request import urlopen
 import re
@@ -13,18 +14,15 @@ CACHE = "data/"
 class Vill:
 
     PATTERNS = [
-        "balfék",
-        "mellet",
-        "tökéletes.mellei",
-        "hatalmas.melle*",
-        "meztelen*", "félmeztelen*",
-        "mutatjuk.meztelen*",
-        "mutatjuk.a.meztelen*",
-        "szexi", "szuperszexi",
-        "meztelenül.mutatta",
-        "meztelenül.pózolt",
-        "tökéletes.combj*",
-        "tökéletes.alakj*",
+        ":mellet:",
+        ":tökéletes:melle",
+        ":hatalmas:melle",
+        ":meztelen", ":félmeztelen",
+        ":mutatjuk:.*:meztelen:",
+        ":szexi:", ":szuperszexi:",
+        ":tökéletes:.*:combj",
+        ":tökéletes:.*:alakj",
+        ":pózol:",
     ]
 
     def main(self):
@@ -52,7 +50,10 @@ class Vill:
 
     def get_cache_filename(self):
 
-        fnam = CACHE + "/" + self.session + ".html"
+        fnam = os.path.realpath(__file__)
+        fnam = os.path.dirname(fnam)
+        fnam += "/" + CACHE + "/" 
+        fnam += self.session + ".html"
         fnam = fnam.replace("//", "/")
 
         return fnam
@@ -97,9 +98,15 @@ class Vill:
             (prepared, text,) = result
 
             for pattern in self.PATTERNS:
-                if self.match(prepared, pattern):
+                
+                pattern = ".*" + pattern + ".*"
+                if re.match(pattern, prepared):
+                    
                     if text.startswith("Fotó"):
                         text = text[4:]
+                    if text.startswith("Képek"):
+                        text = text[5:]
+                        
                     print(" - " + text)
                     break
 
@@ -112,20 +119,10 @@ class Vill:
         if text == "":
             return None
 
-        prepared = "." + text.replace(" ", ".") + "."
+        prepared = ":" + text.replace(" ", ":") + ":"
         prepared = prepared.lower()
         
-        return (prepared, text,)
-
-    def match(self, prepared, pattern):
-
-        if pattern.endswith("*"):
-            pattern = "." + pattern[:-1]
-        else:
-            pattern = "." + pattern + "."
-        
-        return (pattern in prepared)
-            
+        return (prepared, text,)            
 
 if __name__ == "__main__":
     (Vill()).main()
