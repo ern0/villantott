@@ -12,6 +12,10 @@ function vill_main() {
 			":tökéletes:.*:combj",
 			":tökéletes:.*:alakj",
 			":pózol:",
+			":mutogatja:",
+			":vadító:.*:szexi",
+			":nincs:bugyi:",
+			":bugyi:nélkül:",
 	]
 	
 	const container = vill_container();

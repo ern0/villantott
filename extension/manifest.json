@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Villantott",
-  "version": "0.8",
-  "description": "Collect best articles from Origo.hu title page",
+  "version": "1.0.0.21001",
+  "description": "Collect softpron articles from Origo.hu title page",
 
   "icons": {
     "16": "images/icon-16.png",
