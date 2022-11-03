@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Villantott",
-  "version": "1.0.0.21001",
+  "version": "1.0.4.21003",
   "description": "Collect softpron articles from Origo.hu title page",
 
   "icons": {
@@ -18,8 +18,9 @@
         "scripts/villantott.js"
       ],
       "matches": [
-        "https://www.origo.hu/index.html*"
+        "https://www.origo.hu/index.html"
       ]
     }
   ]
+  
 }

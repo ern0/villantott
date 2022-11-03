@@ -2,6 +2,7 @@ data/
 *.pem
 *.crx
 *.zip
+harvest/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

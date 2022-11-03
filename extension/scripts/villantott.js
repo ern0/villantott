@@ -4,8 +4,11 @@ function vill_main() {
 
 	const patterns = [
 			":mellet:",
-			":tökéletes:melle",
-			":hatalmas:melle",
+			":tökéletes:mell",
+			":hatalmas:mell",
+			":gigantikus:mell",
+			":tökéletes:feneke",
+			":tökéletes:feneké",
 			":meztelen", ":félmeztelen",
 			":mutatjuk:.*:meztelen:",
 			":szexi:", ":szuperszexi:",
@@ -14,8 +17,10 @@ function vill_main() {
 			":pózol:",
 			":mutogatja:",
 			":vadító:.*:szexi",
+			":nem:volt:bugyi:",
 			":nincs:bugyi:",
 			":bugyi:nélkül:",
+			":bomba.*test.*:képek:"
 	]
 	
 	const container = vill_container();
