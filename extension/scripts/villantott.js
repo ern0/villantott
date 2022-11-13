@@ -6,6 +6,11 @@ function vill_main() {
 			":mellet:",
 			":tökéletes:mell",
 			":hatalmas:mell",
+			":formás:mell",
+			":giga.*:mell",
+			":kirak.*:mell",
+			"nagy.*mell",
+			":hatalmas:mell",
 			":gigantikus:mell",
 			":tökéletes:feneke",
 			":tökéletes:feneké",
@@ -20,27 +25,32 @@ function vill_main() {
 			":nem:volt:bugyi:",
 			":nincs:bugyi:",
 			":bugyi:nélkül:",
-			":bomba.*test.*:képek:"
+			":bomba.*test.*:képek:",
+			":testrefesz"
 	]
 	
-	const container = vill_container();
+	let container = vill_container();
 	vill_fill(container, patterns);
 
 }
 
 function vill_container() {
 
-	const container = $(".page-header");  // replace
-	
-	container.html("&lt;o&gt; Villantott:");
-	container.css("color", "white");
-	container.css("font-size", "20pt");
-	container.css("padding-left", "8pt");
+	$(".o-section-breaking").append("<div id='villantott'>&lt;o&gt;&nbsp;Villantott:</div>");
+	container = $("#villantott");
+
+	container.css("margin-top", 0);
+	container.css("background", "#001492");
+	container.css("color", "#eeeeff");
+	container.css("font-size", "2.2vw");
+	container.css("padding-left", "1.0vw");
 
 	return container;
 }
 
 function vill_fill(container, patterns) {
+
+	let last_url = "#";
 
 	$("a").each(function(_, link) {
 
@@ -60,14 +70,20 @@ function vill_fill(container, patterns) {
 
 			pattern = ".*" + pattern + ".*"
 			if (normalized_text.match(pattern)) {
-				
-				if (original_text.substring(0,4) == "Fotó") {
-					original_text = original_text.substring(4);
-				}
-				console.log(normalized_text.substring(0,3),original_text);
 
+				original_text = vill_cut_foto(original_text, "galéria");
+				original_text = vill_cut_foto(original_text, "fotó");
+				original_text = vill_cut_foto(original_text, "fotók");
+				original_text = vill_cut_foto(original_text, "fotógaléria");
+				original_text = vill_cut_foto(original_text, "kép");
+				original_text = vill_cut_foto(original_text, "képek");
+				original_text = vill_cut_foto(original_text, "képgaléria");
+				original_text = vill_cut_foto(original_text, "-");
+				original_text = vill_cut_foto(original_text, ".");
+				
 				const url = $(link).attr("href");
-				vill_add(container, original_text, url);
+				vill_add(container, original_text, url, (url == last_url));
+				last_url = url;
 
 				break;
 			}
@@ -76,16 +92,31 @@ function vill_fill(container, patterns) {
 	})
 }
 
-function vill_add(container, text, url) {
+function vill_cut_foto(text, pattern) {
+
+	const plen = pattern.length;
+	const tlen = text.length - plen;
+
+	if (text.toLowerCase().substr(tlen, plen) == pattern) {
+		text = text.substr(0, tlen);
+	}
+
+	return text.trim();
+}
+
+function vill_add(container, text, url, cont) {
 
 	const link = $("<a/>");
 	link.attr("href", url);
-	link.text(text);
+	if (!cont) {
+		link.html("&bull;&nbsp;&nbsp;" + text);
+	} else {
+		link.html("&nbsp;&nbsp;&nbsp;&nbsp;" + text);
+	}
 	link.css("color", "white");
 
-	const item = $("<li/>");
-	item.css("padding-left", "8pt");
-	item.append(link);
+	const div = $("<div/>");
+	div.append(link);
 
-	container.append(item);
+	container.append(div);
 }
