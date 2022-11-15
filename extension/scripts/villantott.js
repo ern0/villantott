@@ -10,8 +10,11 @@ function vill_main() {
 			":giga.*:mell",
 			":kirak.*:mell",
 			"nagy.*mell",
+			":mellbimbó",
 			":hatalmas:mell",
 			":gigantikus:mell",
+			":megmutatta:mell",
+			":megmutatja:mell",
 			":tökéletes:feneke",
 			":tökéletes:feneké",
 			":meztelen", ":félmeztelen",
@@ -36,14 +39,21 @@ function vill_main() {
 
 function vill_container() {
 
-	$(".o-section-breaking").append("<div id='villantott'>&lt;o&gt;&nbsp;Villantott:</div>");
+	$(".o-section-breaking").append("<div id='villantott'><span id='vill-title'>&lt;o&gt;&nbsp;Villantott:</span></div>");
 	container = $("#villantott");
+	title = $("#vill-title");
 
-	container.css("margin-top", 0);
+	container.css("margin-top", "0.3vw");
+	container.css("padding-top", "0.8vw");
+	container.css("padding-bottom", "0.3vw");
 	container.css("background", "#001492");
 	container.css("color", "#eeeeff");
-	container.css("font-size", "2.2vw");
+	container.css("font-size", "2.0vw");
 	container.css("padding-left", "1.0vw");
+
+	title.css("font-weight", "bold");
+	title.css("background", "#eb034a");
+	title.css("padding", "0.1vw 0.5vw 0.1vw 0.5vw");
 
 	return container;
 }
