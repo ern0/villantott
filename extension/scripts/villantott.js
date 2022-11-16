@@ -2,34 +2,53 @@ vill_main();
 
 function vill_main() {
 
-	const patterns = [
-			":mellet:",
+	const patterns = [	
+
+			"nagy.*mell",
 			":tökéletes:mell",
 			":hatalmas:mell",
 			":formás:mell",
 			":giga.*:mell",
+
 			":kirak.*:mell",
-			"nagy.*mell",
+			":megmut.*:mell",
+			":mutogat.*:mell",
+			":mellei.*ellenáll",
+			":mellei.*megmut",
+
 			":mellbimbó",
-			":hatalmas:mell",
-			":gigantikus:mell",
-			":megmutatta:mell",
-			":megmutatja:mell",
-			":tökéletes:feneke",
-			":tökéletes:feneké",
-			":meztelen", ":félmeztelen",
-			":mutatjuk:.*:meztelen:",
-			":szexi:", ":szuperszexi:",
+			":dekoltázs",
+
+			":tökéletes:.*:fenek",
 			":tökéletes:.*:combj",
 			":tökéletes:.*:alakj",
+			
+			":szexi:", 
+			":szuperszexi:",
+			":vadító:.*:szexi",
+			":bomba.*test.*:kép",
+			":bomba.*test.*:videó",
+			":testrefesz",
+
+			":meztelen", 
+			":félmeztelen",
+			":ruha:nélk*:kép",
+			":ruha:nélk*:videó",
+			":alig:.*:ruha:",
+
 			":pózol:",
 			":mutogatja:",
-			":vadító:.*:szexi",
+
 			":nem:volt:bugyi:",
 			":nincs:bugyi:",
 			":bugyi:nélkül:",
-			":bomba.*test.*:képek:",
-			":testrefesz"
+			":tanga.*kép",
+			":tanga.*videó",
+
+			":szexel",
+			":18+",
+
+			":villantott:"
 	]
 	
 	let container = vill_container();
@@ -66,15 +85,21 @@ function vill_fill(container, patterns) {
 
 		let original_text = $(link).text();
 		original_text = original_text.replaceAll("\n","");
+		original_text = original_text.replaceAll("18\ +","[18+] ");
 
 		let normalized_text = original_text.toLowerCase();
+		normalized_text = normalized_text.replaceAll("[",":");
+		normalized_text = normalized_text.replaceAll("]",":");
 		normalized_text = normalized_text.replaceAll("\ ",":");
 		normalized_text = normalized_text.replaceAll("\.",":");
 		normalized_text = normalized_text.replaceAll("\?",":");
 		normalized_text = normalized_text.replaceAll("\!",":");
-		normalized_text = normalized_text.replaceAll("::",":");
-		normalized_text = normalized_text.replaceAll("::",":");
+		for (let i = 0; i < 4; i++) {
+			normalized_text = normalized_text.replaceAll("::",":");
+		}
 		normalized_text = ":" + normalized_text + ":"
+
+		original_text = original_text.replaceAll("villantott", "<span style='color: #ffbbcc'>villantott</span>");
 
 		for (let pattern of patterns) {
 
