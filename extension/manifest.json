@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Villantott",
-  "version": "1.1.3.21116",
-  "description": "Collect softpron articles from Origo.hu title page",
+  "version": "1.2.0.21117",
+  "description": "Kiemeli az origo.hu érdekes cikkeit a lap tetejére",
 
   "icons": {
     "16": "images/icon-16.png",
@@ -12,7 +12,7 @@
   },
 
   "host_permissions": [
-    "https://www.origo.hu/"
+    "https://www.origo.hu/index.html"
   ],
 
   "content_scripts": [
