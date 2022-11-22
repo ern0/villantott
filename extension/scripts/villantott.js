@@ -4,7 +4,7 @@ function vill_main() {
 
 	const patterns = [	
 
-			"nagy.*mell",
+			"nagy.*mellei",
 			":tökéletes:mell",
 			":hatalmas:mell",
 			":formás:mell",
@@ -25,7 +25,9 @@ function vill_main() {
 			
 			":szexi:", 
 			":szuperszexi:",
-			":vadító:.*:szexi",
+			":legszexi",
+			":vadító.*:szexi",
+			":vadító.*:néz:ki:",
 			":bomba.*test.*:kép",
 			":bomba.*test.*:videó",
 			":testrefesz",
@@ -46,7 +48,7 @@ function vill_main() {
 			":tanga.*videó",
 
 			":szexel",
-			":18+",
+			"18\\+",
 
 			":villantott:"
 	]
@@ -85,7 +87,7 @@ function vill_fill(container, patterns) {
 
 		let original_text = $(link).text();
 		original_text = original_text.replaceAll("\n","");
-		original_text = original_text.replaceAll("18\ +","[18+] ");
+		original_text = original_text.replaceAll("18 +","[18+] ");
 
 		let normalized_text = original_text.toLowerCase();
 		normalized_text = normalized_text.replaceAll("[",":");

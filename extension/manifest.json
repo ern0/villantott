@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Villantott",
-  "version": "1.2.0.21117",
+  "version": "1.2.2.21119",
   "description": "Kiemeli az origo.hu érdekes cikkeit a lap tetejére",
 
   "icons": {
@@ -12,18 +12,20 @@
   },
 
   "host_permissions": [
-    "https://www.origo.hu/index.html"
+    "<all_urls>"
   ],
 
   "content_scripts": [
     {
+      "matches": [
+        "https://www.origo.hu/index.html"
+      ],
       "js": [
         "scripts/jquery-3.6.1.min.js",
         "scripts/villantott.js"
       ],
-      "matches": [
-        "https://www.origo.hu/index.html"
-      ]
+      "run_at": "document_idle",
+      "all_frames": false
     }
   ]
   
