@@ -11,6 +11,7 @@ chrome \
 
 mv extension.crx villantott.crx
 
-cp extension/manifest.json .
-7z a villantott.zip manifest.json villantott.crx
+cd extension
+7z a ../villantott.zip manifest.json ../villantott.crx images scripts
+cd ..
 rm -rf manifest.json
