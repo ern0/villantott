@@ -23,7 +23,8 @@ Long term plans:
 
 ### Official
 
-You can install it from Chrome App Store.
+You can install it from Chrome App Store:
+https://chrome.google.com/webstore/detail/villantott/acponbbjgfjkofdhadlnihcbanidjdol
 
 ### Developer mode
 
