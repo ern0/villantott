@@ -16,6 +16,8 @@ function vill_main() {
 			":mutogat.*:mell",
 			":mellei.*ellenáll",
 			":mellei.*megmut",
+			":szabad.*:mell",
+			":kipakol.*:mell",
 
 			":mellbimbó",
 			":dekoltázs",
@@ -61,7 +63,7 @@ function vill_main() {
 
 function vill_container() {
 
-	$(".o-section-breaking").append("<div id='villantott'><span id='vill-title'>&lt;o&gt;&nbsp;Villantott:</span></div>");
+	$(".o-section-breaking").append("<div id='villantott'><span id='vill-title'>&lt;o&gt;&nbsp;Villantott<span id='count'></span>:</span></div>");
 	container = $("#villantott");
 	title = $("#vill-title");
 
@@ -70,7 +72,7 @@ function vill_container() {
 	container.css("padding-bottom", "0.3vw");
 	container.css("background", "#001492");
 	container.css("color", "#eeeeff");
-	container.css("font-size", "2.0vw");
+	container.css("font-size", "1.8vw");
 	container.css("padding-left", "1.0vw");
 
 	title.css("font-weight", "bold");
@@ -83,12 +85,20 @@ function vill_container() {
 function vill_fill(container, patterns) {
 
 	let last_url = "#";
+	let count = 0;
 
 	$("a").each(function(_, link) {
 
 		let original_text = $(link).text();
 		original_text = original_text.replaceAll("\n","");
 		original_text = original_text.replaceAll("18 +","[18+] ");
+		original_text = original_text.replaceAll("2022","2022 ");
+		original_text = original_text.replaceAll("Fotó","Fotó: ");
+		original_text = original_text.replaceAll("Fotó :","Fotó: ");
+		original_text = original_text.replaceAll("Videó","Videó: ");
+		original_text = original_text.replaceAll("Videó :","Videó: ");
+		original_text = original_text.replaceAll(": :",": ");
+		original_text = original_text.replaceAll("::",":");		
 
 		let normalized_text = original_text.toLowerCase();
 		normalized_text = normalized_text.replaceAll("[",":");
@@ -120,7 +130,9 @@ function vill_fill(container, patterns) {
 				original_text = vill_cut_foto(original_text, ".");
 				
 				const url = $(link).attr("href");
-				vill_add(container, original_text, url, (url == last_url));
+				let cont = (url == last_url);
+				vill_add(container, original_text, url, cont);
+				if (!cont) count++;
 				last_url = url;
 
 				break;
@@ -128,6 +140,9 @@ function vill_fill(container, patterns) {
 		}
 
 	})
+
+	$("#count").html(" [" + count + "]");
+
 }
 
 function vill_cut_foto(text, pattern) {
