@@ -9,6 +9,7 @@ function vill_main() {
 			":hatalmas:mell",
 			":formás:mell",
 			":giga.*:mell",
+			":giga.*mell",
 
 			":kirak.*:mell",
 			":megmut.*:mell",
