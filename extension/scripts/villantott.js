@@ -10,6 +10,15 @@ function vill_main() {
 			":formás:mell",
 			":giga.*:mell",
 			":giga.*mell",
+			":óriás.*mell",
+
+			"nagy.*kebl",
+			":tökéletes:kebl",
+			":hatalmas:kebl",
+			":formás:kebl",
+			":giga.*:kebl",
+			":giga.*kebl",
+			":óriás.*kebl",
 
 			":kirak.*:mell",
 			":megmut.*:mell",
@@ -18,13 +27,23 @@ function vill_main() {
 			":mellei.*megmut",
 			":szabad.*:mell",
 			":kipakol.*:mell",
+			":takar.*:mell",
 
 			":mellbimbó",
 			":dekoltázs",
+			":dekoltázzs",
+			":mellkirálynő",
 
 			":tökéletes:.*:fenek",
+			":tökéletes:.*:fenék",
 			":tökéletes:.*:combj",
 			":tökéletes:.*:alakj",
+
+			":ráz.*fenek.*",
+			":fenek.*ráz.*",
+			":fenékráz.*",
+			":kilátsz.*fenék",
+			":kilátsz.*fenek",
 			
 			":szexi:", 
 			":szuperszexi:",
@@ -37,12 +56,26 @@ function vill_main() {
 
 			":meztelen", 
 			":félmeztelen",
-			":ruha:nélk*:kép",
-			":ruha:nélk*:videó",
+			":melltartó.*:nélk.*:kép",
+			":melltartó.*:nélk.*:fotó",
+			":melltartó.*:nélk.*:videó",
+			":ruha:nélk.*:kép",
+			":ruha:nélk.*:fotó",
+			":ruha:nélk.*:videó",
+			"nadrág:nélk.*:kép",
+			"nadrág:nélk.*:fotó",
+			"nadrág:nélk.*:videó",
 			":alig:.*:ruha:",
+			":csak.*takar.*test",
+			":fehérnemű.*fotó",
+			":látszik.*átlátszó",
+			":látszik.*áttetsző",
 
 			":pózol:",
 			":mutogatja:",
+			"őrjít.*kép",
+			"őrjít.*fotó",
+			"őrjít.*videó",
 
 			":nem:volt:bugyi:",
 			":nincs:bugyi:",
@@ -89,16 +122,13 @@ function vill_fill(container, patterns) {
 
 	$("a").each(function(_, link) {
 
-		let original_text = $(link).text();
+		let original_raw = $(link)[0].outerHTML.replaceAll(">", "> ");
+		let original_text = $(original_raw).text();
 		original_text = original_text.replaceAll("\n","");
+		original_text = original_text.replaceAll("   "," ");
+		original_text = original_text.replaceAll("  "," ");
 		original_text = original_text.replaceAll("18 +","[18+] ");
 		original_text = original_text.replaceAll("2022","2022 ");
-		original_text = original_text.replaceAll("Fotó","Fotó: ");
-		original_text = original_text.replaceAll("Fotó :","Fotó: ");
-		original_text = original_text.replaceAll("Videó","Videó: ");
-		original_text = original_text.replaceAll("Videó :","Videó: ");
-		original_text = original_text.replaceAll(": :",": ");
-		original_text = original_text.replaceAll("::",":");		
 
 		let normalized_text = original_text.toLowerCase();
 		normalized_text = normalized_text.replaceAll("[",":");
@@ -135,11 +165,14 @@ function vill_fill(container, patterns) {
 				if (!cont) count++;
 				last_url = url;
 
+				console.log( $(link).text() );
+
 				break;
 			}
+
 		}
 
-	})
+	});
 
 	$("#count").html(" [" + count + "]");
 
