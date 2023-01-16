@@ -39,6 +39,11 @@ function vill_main() {
 			":tökéletes:.*:combj",
 			":tökéletes:.*:alakj",
 
+			":mutat.*:.*:formás:",
+			":vadító:.*:bikini",
+			":vadító:.*:fürdőruh",
+			":vadító:.*:tang",
+
 			":ráz.*fenek.*",
 			":fenek.*ráz.*",
 			":fenékráz.*",
