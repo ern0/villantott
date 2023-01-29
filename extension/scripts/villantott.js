@@ -28,6 +28,7 @@ function vill_main() {
 			":szabad.*:mell",
 			":kipakol.*:mell",
 			":takar.*:mell",
+			":melle:szűk",
 
 			":mellbimbó",
 			":dekoltázs",
@@ -75,6 +76,7 @@ function vill_main() {
 			":fehérnemű.*fotó",
 			":látszik.*átlátszó",
 			":látszik.*áttetsző",
+			":bikini.*:kép",
 
 			":pózol:",
 			":mutogatja:",

@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
+chrome=/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome
+
 rm -rf *.crx
 rm -rf villantott.zip
 
-chrome \
+"$chrome" \
 	--pack-extension=extension \
 	--pack-extension-key=villantott.pem \
 	--no-message-box
