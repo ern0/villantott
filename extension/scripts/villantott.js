@@ -19,6 +19,7 @@ function vill_main() {
 			":giga.*:kebl",
 			":giga.*kebl",
 			":óriás.*kebl",
+			":kebelcsod.*",
 
 			":kirak.*:mell",
 			":megmut.*:mell",
