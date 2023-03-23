@@ -78,6 +78,7 @@ function vill_main() {
 			":látszik.*átlátszó",
 			":látszik.*áttetsző",
 			":bikini.*:kép",
+			":meztelen.*:fotó",
 
 			":pózol:",
 			":mutogatja:",
@@ -92,7 +93,10 @@ function vill_main() {
 			":tanga.*videó",
 
 			":szexel",
-			"18\\+",
+			"^18\+",
+			"^\:18\+",
+			"^18\ \+",
+			"^\:18\ \+",
 
 			":villantott:"
 	]
@@ -145,10 +149,11 @@ function vill_fill(container, patterns) {
 		normalized_text = normalized_text.replaceAll("\.",":");
 		normalized_text = normalized_text.replaceAll("\?",":");
 		normalized_text = normalized_text.replaceAll("\!",":");
+
+		normalized_text = ":" + normalized_text + ":"
 		for (let i = 0; i < 4; i++) {
 			normalized_text = normalized_text.replaceAll("::",":");
 		}
-		normalized_text = ":" + normalized_text + ":"
 
 		original_text = original_text.replaceAll("villantott", "<span style='color: #ffbbcc'>villantott</span>");
 
@@ -166,14 +171,12 @@ function vill_fill(container, patterns) {
 				original_text = vill_cut_foto(original_text, "képgaléria");
 				original_text = vill_cut_foto(original_text, "-");
 				original_text = vill_cut_foto(original_text, ".");
-				
+
 				const url = $(link).attr("href");
 				let cont = (url == last_url);
 				vill_add(container, original_text, url, cont);
 				if (!cont) count++;
 				last_url = url;
-
-				console.log( $(link).text() );
 
 				break;
 			}
